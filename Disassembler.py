@@ -25,10 +25,10 @@ output_file = open("MIPS_asm.txt", "w")
 
 for line in input_file:
     line = line.replace("\n", "")  # remove 'endline' character
-    if(line[0] == 0):
-        line[0] = line[0].replace('0', '')  # remove parity bit
+    if(line[0] == '0'):
+        line = line.replace("0", "", 1)  # remove parity bit
     else:
-        line[0] = line[0].replace('1', '')  # remove parity bit
+        line = line.replace("1", "", 1)  # remove parity bit
     line = line.replace(" ", "")  # remove spaces anywhere in line
 
     if (line[1:3] == '000'):  # lw
@@ -215,6 +215,9 @@ for line in input_file:
             line[4:7] = line[4:7].replace('111', '7')
 
         line = line.replace("0", "")
+
+    elif (line[1:7] == '1111111'):
+        line[1:7] = line[1:7].replace('1111111', 'Halt')
     else:
         print("Unknown instruction:" + line)
 
