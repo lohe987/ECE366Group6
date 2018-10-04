@@ -2,18 +2,19 @@
 # SIC instruction encoding format:
 # ~~: R0/R1
 # --: R2/R3
+# ii: immediate
 # lw    p 000 xx yy
 # sw    p 001 xx yy
 # add   p 100 ~~ --
-# addi  p 100 -- ~~
+# addi  p 100 -- ii
 # sub   p 010 ~~ --
-# subi  p 010 -- ~~
+# subi  p 010 -- ii
 # sltR0 p 011 ~~ --
 # seqR0 p 011 -- ~~
 # xor   p 110 ~~ --
 # and   p 110 -- ~~
-# init  p 101 ~~ --
-# sll   p 101 -- ~~
+# init  p 101 ~~ ii
+# sll   p 101 -- ii
 # j     p 111 0i ii
 # beqR0 p 111 1i ii
 # Halt  p 111 11 11
