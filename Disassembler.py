@@ -43,186 +43,264 @@ for line in input_file:
             line = line.replace('11', '$3, ', 1)
 
         if (line[7:9] == '00'):
-            line = line.replace('00', '$0')
+            line = line.replace('00', '($0)', 1)
         elif (line[7:9] == '01'):
-            line = line.replace('01', '$1')
+            line = line.replace('01', '($1)', 1)
         elif (line[7:9] == '10'):
-            line = line.replace('10', '$2')
+            line = line.replace('10', '($2)', 1)
         else:
-            line = line.replace('11', '$3')
+            line = line.replace('11', '($3)', 1)
 
-
-    elif (line[1:3] == '001'):  # sw
-        line[1:3] = line[1:3].replace('001', 'sw ')
-        if(line[4:5] == '00'):
-            line[4:5] = line[4:5].replace('00', '$0, ')
-        elif(line[4:5] == '01'):
-            line[4:5] = line[4:5].replace('01', '$1, ')
-        elif(line[4:5] == '10'):
-            line[4:5] = line[4:5].replace('10', '$2, ')
+    elif (line[0:3] == '001'):  # sw
+        line = line.replace("001", "sw ", 1)  # remove 000 and use sw
+        if(line[3:5] == '00'):
+            line = line.replace('00', '$0, ', 1)
+        elif(line[3:5] == '01'):
+            line = line.replace('01', '$1, ', 1)
+        elif(line[3:5] == '10'):
+            line = line.replace('10', '$2, ', 1)
         else:
-            line[4:5] = line[4:5].replace('11', '$3, ')
+            line = line.replace('11', '$3, ', 1)
 
-        if (line[6:7] == '00'):
-            line[6:7] = line[6:7].replace('00', '$0')
-        elif (line[6:7] == '01'):
-            line[6:7] = line[6:7].replace('01', '$1')
-        elif (line[6:7] == '10'):
-            line[6:7] = line[6:7].replace('10', '$2')
+        if (line[7:9] == '00'):
+            line = line.replace('00', '($0)', 1)
+        elif (line[7:9] == '01'):
+            line = line.replace('01', '($1)', 1)
+        elif (line[7:9] == '10'):
+            line = line.replace('10', '($2)', 1)
         else:
-            line[6:7] = line[6:7].replace('11', '$3')
+            line = line.replace('11', '($3)', 1)
 
-    elif (line[1:3] == '100'):  # add/addi
-        if(line[4] == '0'):
-            line[1:3] = line[1:3].replace('100', 'add ')
-        if(line[4] == '1'):
-            line[1:3] = line[1:3].replace('100', 'addi ')
 
-        if(line[4:5] == '00'):
-            line[4:5] = line[4:5].replace('00', '$0, ')
-        elif(line[4:5] == '01'):
-            line[4:5] = line[4:5].replace('01', '$1, ')
-        elif(line[4:5] == '10'):
-            line[4:5] = line[4:5].replace('10', '$2, ')
+
+    elif (line[0:3] == '100'):  # add/addi
+        if(line[3:4] == '0'):
+            line = line.replace('100', 'add ', 1)
+            if (line[4:6] == '00'):
+                line = line.replace('00', '$0, ', 1)
+            elif (line[4:6] == '01'):
+                line = line.replace('01', '$1, ', 1)
+            elif (line[4:6] == '10'):
+                line = line.replace('10', '$2, ', 1)
+            else:
+                line = line.replace('11', '$3, ', 1)
+
+            if (line[8:10] == '00'):
+                line = line.replace('00', '$0', 1)
+            elif (line[8:10] == '01'):
+                line = line.replace('01', '$1', 1)
+            elif (line[8:10] == '10'):
+                line = line.replace('10', '$2', 1)
+            else:
+                line = line.replace('11', '$3', 1)
         else:
-            line[4:5] = line[4:5].replace('11', '$3, ')
+            line = line.replace('100', 'addi ', 1)
+            if (line[5:7] == '00'):
+                line = line.replace('00', '$0, ', 1)
+            elif (line[5:7] == '01'):
+                line = line.replace('01', '$1, ', 1)
+            elif (line[5:7] == '10'):
+                line = line.replace('10', '$2, ', 1)
+            else:
+                line = line.replace('11', '$3, ', 1)
 
-        if (line[6:7] == '00'):
-            line[6:7] = line[6:7].replace('00', '$0')
-        elif (line[6:7] == '01'):
-            line[6:7] = line[6:7].replace('01', '$1')
-        elif (line[6:7] == '10'):
-            line[6:7] = line[6:7].replace('10', '$2')
+            if (line[9:11] == '00'):
+                line = line.replace('00', '0')
+            elif (line[9:11] == '01'):
+                line = line.replace('01', '1')
+            elif (line[9:11] == '10'):
+                line = line.replace('10', '2')
+            elif (line[9:11] == '11'):
+                line = line.replace('11', '3')
+
+
+
+    elif (line[0:3] == '010'):  # sub/subi
+        if(line[3:4] == '0'):
+            line = line.replace('010', 'sub ', 1)
+            if (line[4:6] == '00'):
+                line = line.replace('00', '$0, ', 1)
+            elif (line[4:6] == '01'):
+                line = line.replace('01', '$1, ', 1)
+            elif (line[4:6] == '10'):
+                line = line.replace('10', '$2, ', 1)
+            else:
+                line = line.replace('11', '$3, ', 1)
+
+            if (line[8:10] == '00'):
+                line = line.replace('00', '$0', 1)
+            elif (line[8:10] == '01'):
+                line = line.replace('01', '$1', 1)
+            elif (line[8:10] == '10'):
+                line = line.replace('10', '$2', 1)
+            else:
+                line = line.replace('11', '$3', 1)
         else:
-            line[6:7] = line[6:7].replace('11', '$3')
+            line = line.replace('010', 'subi ', 1)
+            if (line[5:7] == '00'):
+                line = line.replace('00', '$0, ', 1)
+            elif (line[5:7] == '01'):
+                line = line.replace('01', '$1, ', 1)
+            elif (line[5:7] == '10'):
+                line = line.replace('10', '$2, ', 1)
+            else:
+                line = line.replace('11', '$3, ', 1)
 
-    elif (line[1:3] == '010'):  # sub/subi
-        if (line[4] == '0'):
-            line[1:3] = line[1:3].replace('010', 'sub ')
-        if (line[4] == '1'):
-            line[1:3] = line[1:3].replace('010', 'subi ')
+            if (line[9:11] == '00'):
+                line = line.replace('00', '0')
+            elif (line[9:11] == '01'):
+                line = line.replace('01', '1')
+            elif (line[9:11] == '10'):
+                line = line.replace('10', '2')
+            elif (line[9:11] == '11'):
+                line = line.replace('11', '3')
 
-        if (line[4:5] == '00'):
-            line[4:5] = line[4:5].replace('00', '$0, ')
-        elif (line[4:5] == '01'):
-            line[4:5] = line[4:5].replace('01', '$1, ')
-        elif (line[4:5] == '10'):
-            line[4:5] = line[4:5].replace('10', '$2, ')
+    elif (line[0:3] == '011'):  # sltR0/seqR0
+        if(line[3:4] == '0'):
+            line = line.replace('011', 'sltR0 ', 1)
+            if (line[6:8] == '00'):
+                line = line.replace('00', '$0, ', 1)
+            elif (line[6:8] == '01'):
+                line = line.replace('01', '$1, ', 1)
+            elif (line[6:8] == '10'):
+                line = line.replace('10', '$2, ', 1)
+            else:
+                line = line.replace('11', '$3, ', 1)
+
+            if (line[10:12] == '00'):
+                line = line.replace('00', '$0', 1)
+            elif (line[10:12] == '01'):
+                line = line.replace('01', '$1', 1)
+            elif (line[10:12] == '10'):
+                line = line.replace('10', '$2', 1)
+            else:
+                line = line.replace('11', '$3', 1)
         else:
-            line[4:5] = line[4:5].replace('11', '$3, ')
+            line = line.replace('011', 'seqR0 ', 1)
+            if (line[6:8] == '00'):
+                line = line.replace('00', '$0, ', 1)
+            elif (line[6:8] == '01'):
+                line = line.replace('01', '$1, ', 1)
+            elif (line[6:8] == '10'):
+                line = line.replace('10', '$2, ', 1)
+            else:
+                line = line.replace('11', '$3, ', 1)
 
-        if (line[6:7] == '00'):
-            line[6:7] = line[6:7].replace('00', '$0')
-        elif (line[6:7] == '01'):
-            line[6:7] = line[6:7].replace('01', '$1')
-        elif (line[6:7] == '10'):
-            line[6:7] = line[6:7].replace('10', '$2')
+            if (line[10:12] == '00'):
+                line = line.replace('00', '$0', 1)
+            elif (line[10:12] == '01'):
+                line = line.replace('01', '$1', 1)
+            elif (line[10:12] == '10'):
+                line = line.replace('10', '$2', 1)
+            else:
+                line = line.replace('11', '$3', 1)
+
+    elif (line[0:3] == '110'):  # xor/and
+        if (line[3:4] == '0'):
+            line = line.replace('110', 'xor ', 1)
         else:
-            line[6:7] = line[6:7].replace('11', '$3')
+            line = line.replace('110', 'and ', 1)
 
-    elif (line[1:3] == '011'):  # sltR0/seqR0
-        if (line[4] == '0'):
-            line[1:3] = line[1:3].replace('011', 'sltR0 ')
-        if (line[4] == '1'):
-            line[1:3] = line[1:3].replace('011', 'seqR0 ')
-
-        if (line[4:5] == '00'):
-            line[4:5] = line[4:5].replace('00', '$0, ')
-        elif (line[4:5] == '01'):
-            line[4:5] = line[4:5].replace('01', '$1, ')
-        elif (line[4:5] == '10'):
-            line[4:5] = line[4:5].replace('10', '$2, ')
+        if (line[4:6] == '00'):
+            line = line.replace('00', '$0, ', 1)
+        elif (line[4:6] == '01'):
+            line = line.replace('01', '$1, ', 1)
+        elif (line[4:6] == '10'):
+            line = line.replace('10', '$2, ', 1)
         else:
-            line[4:5] = line[4:5].replace('11', '$3, ')
+            line = line.replace('11', '$3, ', 1)
 
-        if (line[6:7] == '00'):
-            line[6:7] = line[6:7].replace('00', '$0')
-        elif (line[6:7] == '01'):
-            line[6:7] = line[6:7].replace('01', '$1')
-        elif (line[6:7] == '10'):
-            line[6:7] = line[6:7].replace('10', '$2')
+        if (line[8:10] == '00'):
+            line = line.replace('00', '$0', 1)
+        elif (line[8:10] == '01'):
+            line = line.replace('01', '$1', 1)
+        elif (line[8:10] == '10'):
+            line = line.replace('10', '$2', 1)
         else:
-            line[6:7] = line[6:7].replace('11', '$3')
+            line = line.replace('11', '$3', 1)
 
-    elif (line[1:3] == '110'):  # xor/and
-        if (line[4] == '0'):
-            line[1:3] = line[1:3].replace('110', 'xor ')
-        if (line[4] == '1'):
-            line[1:3] = line[1:3].replace('110', 'and ')
+    elif (line[0:3] == '101'):  # init/sll
+        if(line[3:4] == '1'):
+            line = line.replace('101', 'sll ', 1)
+            if (line[4:6] == '00'):
+                line = line.replace('00', '$0, ', 1)
+            elif (line[4:6] == '01'):
+                line = line.replace('01', '$1, ', 1)
+            elif (line[4:6] == '10'):
+                line = line.replace('10', '$2, ', 1)
+            else:
+                line = line.replace('11', '$3, ', 1)
 
-        if (line[4:5] == '00'):
-            line[4:5] = line[4:5].replace('00', '$0, ')
-        elif (line[4:5] == '01'):
-            line[4:5] = line[4:5].replace('01', '$1, ')
-        elif (line[4:5] == '10'):
-            line[4:5] = line[4:5].replace('10', '$2, ')
+            if (line[8:10] == '00'):
+                line = line.replace('00', '0')
+            elif (line[8:10] == '01'):
+                line = line.replace('01', '1')
+            elif (line[8:10] == '10'):
+                line = line.replace('10', '2')
+            elif (line[8:10] == '11'):
+                line = line.replace('11', '3')
         else:
-            line[4:5] = line[4:5].replace('11', '$3, ')
+            line = line.replace('101', 'init ', 1)
+            if (line[5:7] == '00'):
+                line = line.replace('00', '$0, ', 1)
+            elif (line[5:7] == '01'):
+                line = line.replace('01', '$1, ', 1)
+            elif (line[5:7] == '10'):
+                line = line.replace('10', '$2, ', 1)
+            else:
+                line = line.replace('11', '$3, ', 1)
 
-        if (line[6:7] == '00'):
-            line[6:7] = line[6:7].replace('00', '$0')
-        elif (line[6:7] == '01'):
-            line[6:7] = line[6:7].replace('01', '$1')
-        elif (line[6:7] == '10'):
-            line[6:7] = line[6:7].replace('10', '$2')
+            if (line[9:11] == '00'):
+                line = line.replace('00', '0')
+            elif (line[9:11] == '01'):
+                line = line.replace('01', '1')
+            elif (line[9:11] == '10'):
+                line = line.replace('10', '-2')
+            elif (line[9:11] == '11'):
+                line = line.replace('11', '-1')
+
+    elif (line[0:3] == '111'):  # j/beqR0
+        if (line[3:4] == '0'):
+            line = line.replace('1110', 'j ', 1)
+            if (line[2:5] == '000'):
+                line = line.replace('000', '0')
+            elif (line[2:5] == '001'):
+                line = line.replace('001', '1')
+            elif (line[2:5] == '010'):
+                line = line.replace('010', '2')
+            elif (line[2:5] == '011'):
+                line = line.replace('011', '3')
+            elif (line[2:5] == '100'):
+                line = line.replace('100', '4')
+            elif (line[2:5] == '101'):
+                line = line.replace('101', '5')
+            elif (line[2:5] == '110'):
+                line = line.replace('110', '6')
+            else:
+                line = line.replace('111', '7')
         else:
-            line[6:7] = line[6:7].replace('11', '$3')
+            line = line.replace('1111', 'beqR0 ', 1)
+            if (line[6:9] == '000'):
+                line = line.replace('000', '0')
+            elif (line[6:9] == '001'):
+                line = line.replace('001', '1')
+            elif (line[6:9] == '010'):
+                line = line.replace('010', '2')
+            elif (line[6:9] == '011'):
+                line = line.replace('011', '3')
+            elif (line[6:9] == '100'):
+                line = line.replace('100', '4')
+            elif (line[6:9] == '101'):
+                line = line.replace('101', '5')
+            elif (line[6:9] == '110'):
+                line = line.replace('110', '6')
+            else:
+                line = line.replace('beqR0 111', 'Halt')
 
-    elif (line[1:3] == '101'):  # init/sll
-        if (line[4] == '0'):
-            line[1:3] = line[1:3].replace('101', 'init ')
-        if (line[4] == '1'):
-            line[1:3] = line[1:3].replace('101', 'sll ')
-
-        if (line[4:5] == '00'):
-            line[4:5] = line[4:5].replace('00', '$0, ')
-        elif (line[4:5] == '01'):
-            line[4:5] = line[4:5].replace('01', '$1, ')
-        elif (line[4:5] == '10'):
-            line[4:5] = line[4:5].replace('10', '$2, ')
-        else:
-            line[4:5] = line[4:5].replace('11', '$3, ')
-
-        if (line[6:7] == '00'):
-            line[6:7] = line[6:7].replace('00', '$0')
-        elif (line[6:7] == '01'):
-            line[6:7] = line[6:7].replace('01', '$1')
-        elif (line[6:7] == '10'):
-            line[6:7] = line[6:7].replace('10', '$2')
-        else:
-            line[6:7] = line[6:7].replace('11', '$3')
-
-    elif (line[1:3] == '111'):  # j/beqR0
-        if (line[4] == '0'):
-            line[1:3] = line[1:3].replace('111', 'j ')
-        if (line[4] == '1'):
-            line[1:3] = line[1:3].replace('111', 'beqR0 ')
-
-        if (line[5:7] == '000'):
-            line[4:7] = line[4:7].replace('000', '0')
-        elif (line[5:7] == '001'):
-            line[4:7] = line[4:7].replace('001', '1')
-        elif (line[5:7] == '010'):
-            line[4:7] = line[4:7].replace('010', '2')
-        elif (line[5:7] == '011'):
-            line[4:7] = line[4:7].replace('011', '3')
-        elif (line[5:7] == '100'):
-            line[4:7] = line[4:7].replace('100', '4')
-        elif (line[5:7] == '101'):
-            line[4:7] = line[4:7].replace('101', '5')
-        elif (line[5:7] == '110'):
-            line[4:7] = line[4:7].replace('110', '6')
-        else:
-            line[4:7] = line[4:7].replace('111', '7')
-
-        line = line.replace("0", "")
-
-    elif (line[1:7] == '1111111'):
-        line[1:7] = line[1:7].replace('1111111', 'Halt')
     else:
         print("Unknown instruction:" + line)
 
-    output_file.write(line)
+    output_file.write(line + "\n")
 
 input_file.close()
 output_file.close()
