@@ -1,0 +1,124 @@
+main:
+addi $r2, 1 #achieve the number 6
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+init $r0, 0 #set $r0 to memory location 0x0000
+sw $r2, ($r0) # 6 is now in memory location 0x0000
+#could make another 6 or copy it later
+
+addi $r2, 1 #achieve the number 17
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+addi $r2, 1
+init $r0, 1 #set $r0 to memory location 0x0001
+sw $r2, ($r0) #17 is now in memory location 0x0001
+
+init $r0, 0 #set $r0 to memory location 0x0000 
+addi $r3, 1
+addi $r3, 1
+add $r0, $r3 #set $r0 to memory locatiion 0x0002
+subi $r3, 1 #r3 is now set to 1
+subi $r3, 1 #r3 is reset to 0
+subi $r2, 1
+subi $r2, 1
+subi $r2, 1
+subi $r2, 1
+subi $r2, 1
+subi $r2, 1
+subi $r2, 1
+sw $r2, ($r0) #10 is now in memory location 0x0002
+
+init $r0, 0 #set $r0 to memory location 0x0000
+lw $r2, ($r0) #pull 6 back out from memory
+loop2:
+
+loop:
+add $r1, $r2
+addi $r3, 1 
+sub $r0, $r3 #decrement the counter by 1 then 2 then 3. . .
+beqR0 2 #if counter is 0 leave the loop
+j -4
+done:
+subi $r3, 1
+subi $r3, 1
+subi $r3, 1
+subi $r3, 1
+subi $r3, 1
+subi $r3, 1 #reset r3 back to 0
+init $r0, 0
+addi $r3, 1
+addi $r3, 1
+addi $r3, 1
+add $r0, $r3
+sw $r1, ($r0) #store product of 6 times larger number in 0x0003
+init $r0, 0
+subi $r3, 1
+add $r0, $r3 #set r0 to memory location 0x0002
+lw $r1, ($r0) #$r1 is now equal to 10
+subi $r3, 1
+sub $r1, $r3
+sw $r1, ($r0) #decrement the  counter and put it back in memory location 0x0002
+sltR0 $r1, $r3 #check to see if counter is less than 1
+subi $r3, 1
+init $r0, 0
+addi $r3, 1
+addi $r3, 1
+addi $r3, 1
+add $r0, $r3
+lw $r2, ($r0) #load product of 6 times larger number in 0x0003
+init $r0, 0
+subi $r3, 1
+subi $r3, 1
+subi $r3, 1 #reset r3
+addi $r3, 1
+addi $r3, 1
+addi $r3, 1
+addi $r3, 1
+add $r0, $r3 #memory 0x0004 has data value 0
+subi $r3, 1
+subi $r3, 1
+subi $r3, 1
+subi $r3, 1
+lw $r1, ($r0)
+init $r0, 0
+lw $r0, ($r0)
+beqR0 2
+j -25
+done2:
+
+init $r0, 0
+addi $r3, 1
+addi $r3, 1
+addi $r3, 1
+add $r0, $r3
+subi $r3, 1
+subi $r3, 1
+subi $r3, 1
+lw $r1, ($r0) #load in the big number from 0x0003
+init $r0, 0
+addi $r3, 1
+add $r0, $r3
+subi $r3, 1
+lw $r2, ($r0) #load in 17 from 0x0001
+
+loop3: #mod 17
+sub $r1, $r2
+sltR0 $r1, $r2
+beqR0 2
+j -3
+else:
+sw $r1, ($r0) #answer is in memory location 0x0001
+
+
+  
+
