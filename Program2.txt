@@ -1,19 +1,104 @@
 # Need to figure out how to deal with user inputs but we'll assume they are taking up the first 
-# 23 spaces of memory after 0x0000: (T (0x0001 or 1), best_matching_score (0x0002 or 2), best_matching_count (0x0003 or 3),
-# Pattern_Array (0x0004 - 0x0018 or 4-24)
+# 23 spaces of memory after 0x0001: (T (0x0002 or 2), best_matching_score (0x0003 or 3), best_matching_count (0x0004 or 4),
+# Pattern_Array (0x0005 - 0x0019 or 5-24)
+
 
 
 #Initialize best_matching_score and best_matching_count to -1 as initialization each:
-init $r0, -1 # set r0 = -1
+init $r0, 1 # set r0 = 1 temporarily
 init $r1, 1 # set r1 = 1
 add $r1, $r1 # r1 = 1 + 1 = 2
-sw $r0, $r1 # set $r0 val of -1 into mem loc 2 which is 0x0002
-init $r0, 1 # set r0 = 1 temporarily
 add $r1, $r0 # r1 = 2 + 1 = 3
-init $r0, -1 # set r0 back to -1
+init $r0, -1 # set r0 = -1
 sw $r0, $r1 # set $r0 val of -1 into mem loc 3 which is 0x0003
+init $r0, 1 # set r0 = 1 temporarily
+add $r1, $r0 # r1 = 3 + 1 = 4
+init $r0, -1 # set r0 back to -1
+sw $r0, $r1 # set $r0 val of -1 into mem loc 4 which is 0x0004
 init $r0, 0 # reset r0 back to 0
 init $r1, 0 # reset r1 back to 0
+
+#Initialize mem loc 0x0000 = 0 and mem loc 0x0001 = 1
+sw $r0, $r0 # r0 is already = 0, set $r0 val of 0 into mem loc 0 which is 0x0000
+init $r1, 1 # set r1 to 1
+sw $r1, $r1 # set $r1 val of 1 into mem loc 1 which is 0x0001
+init $r1, 0 # reset r1 back to 0, r0 is still 0 at this point
+
+#Initializing r2 and r3 to 0 so that all registers = 0 initially
+lw $r2, $r0 # r0 is 0 at this point, r2 now = 0
+lw $r3, $r0 # r0 is 0 at this point, r3 now = 0  
+
+#Initialize user input of T and Pattern_Array (HARD CODED)
+addi $r2, 3 # $r2 = 0 + 3 = 3
+sll $r2, 2 # $r2 = 3 * 2^2 = 3 * 4 = 12
+addi $r3, 2 # $r3 = 0 + 2 = 2
+sw $r2, $r3 # store r2 val of 12 into mem loc 2 or 0x0002
+addi $r3, 3 # r3 = 2 + 3 = 5
+init r0, 0 # set r0 = 0
+lw $r2, $r0 # load 0 into r2 from mem loc 0 or 0x0000
+sw $r2, $r3 # store 0 into mem loc 5
+addi $r2, 1 # r2 = 0 + 1 = 1
+addi $r3, 1 # r3 = 5 + 1 = 6
+sw $r2, $r3 # store 1 into mem loc 6
+addi $r2, 1 # r2 = 1 + 1 = 2
+addi $r3, 1 # r3 = 6 + 1 = 7
+sw $r2, $r3 # store 2 into mem loc 7
+addi $r2, 1 # r2 = 2 + 1 = 3
+addi $r3, 1 # r3 = 7 + 1 = 8
+sw $r2, $r3 # store 3 into mem loc 8
+addi $r2, 1 # r2 = 3 + 1 = 4
+addi $r3, 1 # r3 = 8 + 1 = 9
+sw $r2, $r3 # store 4 into mem loc 9
+addi $r2, 1 # r2 = 4 + 1 = 5
+addi $r3, 1 # r3 = 9 + 1 = 10
+sw $r2, $r3 # store 5 into mem loc 10
+addi $r2, 1 # r2 = 5 + 1 = 6
+addi $r3, 1 # r3 = 10 + 1 = 11
+sw $r2, $r3 # store 6 into mem loc 11
+addi $r2, 1 # r2 = 6 + 1 = 7
+addi $r3, 1 # r3 = 11 + 1 = 12
+sw $r2, $r3 # store 7 into mem loc 12
+addi $r2, 1 # r2 = 7 + 1 = 8
+addi $r3, 1 # r3 = 12 + 1 = 13
+sw $r2, $r3 # store 8 into mem loc 13
+addi $r2, 1 # r2 = 8 + 1 = 9
+addi $r3, 1 # r3 = 13 + 1 = 14
+sw $r2, $r3 # store 9 into mem loc 14
+addi $r2, 1 # r2 = 9 + 1 = 10
+addi $r3, 1 # r3 = 14 + 1 = 15
+sw $r2, $r3 # store 10 into mem loc 15
+addi $r2, 1 # r2 = 10 + 1 = 11
+addi $r3, 1 # r3 = 15 + 1 = 16
+sw $r2, $r3 # store 11 into mem loc 16
+addi $r2, 1 # r2 = 11 + 1 = 12
+addi $r3, 1 # r3 = 16 + 1 = 17
+sw $r2, $r3 # store 13 into mem loc 17
+addi $r2, 1 # r2 = 12 + 1 = 13
+addi $r3, 1 # r3 = 17 + 1 = 18
+sw $r2, $r3 # store 14 into mem loc 18
+addi $r2, 1 # r2 = 13 + 1 = 14
+addi $r3, 1 # r3 = 18 + 1 = 19
+sw $r2, $r3 # store 15 into mem loc 19
+addi $r2, 1 # r2 = 14 + 1 = 15
+addi $r3, 1 # r3 = 19 + 1 = 20
+sw $r2, $r3 # store 16 into mem loc 20
+addi $r2, 1 # r2 = 15 + 1 = 16
+addi $r3, 1 # r3 = 20 + 1 = 21
+sw $r2, $r3 # store 17 into mem loc 21
+addi $r2, 1 # r2 = 16 + 1 = 17
+addi $r3, 1 # r3 = 21 + 1 = 22
+sw $r2, $r3 # store 18 into mem loc 22
+addi $r2, 1 # r2 = 17 + 1 = 18
+addi $r3, 1 # r3 = 22 + 1 = 23
+sw $r2, $r3 # store 19 into mem loc 23
+addi $r2, 1 # r2 = 18 + 1 = 19
+addi $r3, 1 # r3 = 23 + 1 = 24
+sw $r2, $r3 # store 20 into mem loc 24
+
+init r0, 0 # reset r0 = 0
+init r1, 0 # reset r1 = 0
+lw $r2, $r0 # reset r2 = 0
+lw $r3, $r0 # reset r3 = 0 
 
 #Storing 20 in memory. This will help for our array loop
 addi $r2, 1 # registers are initially at 0, so r2 = 0 + 1 = 1
@@ -23,30 +108,193 @@ addi $r2, 3 # r2 = 16 + 3 = 19
 addi $r2, 1 # r2 = 19 + 1 = 20
 addi $r3, 3 # r3 = 0 + 3 = 3
 addi $r3, 1 # r3 = 3 + 1 = 4
+addi $r3, 2 # r3 = 4 + 2 = 6
 add $r0, $r2 # r0 = 0 + 20 = 20
-add $r0, $r3 # r0 = 20 + 4 = 24, this is for the mem loc 
-sw $r2, $r0 # store $r2 val of 20 into mem loc 24 which is 0x0018
-#At this point, $r3 = 4, $r2 = 20 and $r0 = 24
+add $r0, $r3 # r0 = 20 + 6 = 26, this is for the mem loc 
+sw $r2, $r0 # store $r2 val of 20 into mem loc 26 which is 0x001A
+#At this point, $r3 = 6, $r2 = 20 and $r0 = 26
 
 #Storing 32 in memory for calculating HD later
 addi $r2, 3 # r2 = 20 + 3 = 23
-addi $r2, 2 # r2 = 23 + 2 = 25
-sll $r3, 1 # r3 = 4 << 1 = 8
-add $r0, $r3 # r0 = 24 + 8 = 32
-sw $r0, $r2 # store $r0 val of 32 into mem loc 25 which is 0x0019
-#At this point, $r3 = 8, $r2 = 25, $r0 = 32
+addi $r2, 3 # r2 = 23 + 3 = 26
+addi $r2, 1 # r2 = 26 + 1 = 27
+add $r0, $r3 # r0 = 26 + 6 = 32
+sw $r0, $r2 # store $r0 val of 32 into mem loc 27 which is 0x001B
+#At this point, $r3 = 6, $r2 = 27, $r0 = 32
 
-#Set r0 = 20 and r1 = 0 for array loop initialization:
-#r0 = 20:
-sub $r0, $r3 # r0 = 32 - 8 = 24
-subi $r3, 3 # r3 = 8 - 3 = 5
-subi $r3, 1 # r3 = 5 - 1 = 4
-sub $r0, $r3 # r0 = 24 - 4 = 20
-# $r1 is already = 0 at this point
-#At this point, $r3 = 4, $r2 = 25, $r1 = 0, $r0 = 20
+#Set r2 = 20 and r3 = -1 for array loop initialization:
+#r2 = 20:
+subi $r2, 3 # r2 = 27 - 3 = 24
+subi $r2, 3 # r2 = 24 - 3 = 21
+subi $r2, 1 # r2 = 21 - 1 = 20
+# $r3 = -1
+init $r1, 0 # set r1 = 0
+lw $r3, $r1 # load val 0 from mem location 0 or 0x0000, r3 = 0
+subi $r3, 1 # r3 = 0 - 1 = -1 
+init $r1, 0 # reset r1 to 0
+init $r0, 0 # set r0 to 0
+#At this point, $r3 = -1, $r2 = 20, $r1 = 0, $r0 = 0
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#r2 = array decrementer, r0 = r2 required beg. of loop, r3 = array element #, initially -1
 a_loop: # array loop
-	beqR0 out #IMPORTANT: using branch 'out' instead of imm val for now
-
-# The program, at the moment, is incomplete. Noticed insufficiency with register use and
-# it would require a tweak in the ISA Design. Will discuss in next meeting.
+	init $r0, 0 # always sets r0 to 0 first
+	add $r0, $r2 # since r0 is always 0 beforehand, r0 = r2 everytime
+	beqR0 7 #NOTE: this is NOT negative, so it jumps forward 2^7
+	subi $r2, 1 # decrement r2
+	addi $r3, 1 # increment r3
+	lw $r1, $r3 # load array value at mem loc 'r3' into r1
+	#load T val in 0x0002 into r0
+	init $r0, 1 # set r0 = 1
+	add $r0, $r0 # r0 = 1 + 1 = 2
+	lw $r0, $r0 # load T from mem loc 0x0002 into r0, r0 now = T
+	xor $r0, $r1 # XOR of r0 and r1, store result into r0 
+	init $r0, 0 # set r0 = 0
+	sw $r1, $r0 # store XOR result into mem loc 0x0000 temporarily, overwriting '0'
+	init $r0, 1 # set r0 = 1
+	add $r0, $r0 # r0 = 1 + 1 = 2
+	add $r0, $r0 # r0 = 2 + 2 = 4
+	add $r0, $r0 # r0 = 4 + 4 = 8
+	add $r0, $r0 # r0 = 8 + 8 = 16
+	add $r0, $r0 # r0 = 16 + 16 = 32
+	init $r1, 1 # set r1 = 1, used to decrement r0 by 1
+	sub $r0, $r1 # r0 = 32 - 1 = 31
+	add $r1, $r1 # r1 = 1 + 1 = 2 
+	add $r1, $r1 # r1 = 2 + 2 = 4
+	add $r1, $r1 # r1 = 4 + 4 = 8
+	add $r1, $r1 # r1 = 8 + 8 = 16
+	add $r1, $r1 # r1 = 16 + 16 = 32
+	add $r1, $r1 # r1 = 32 + 32 = 64
+	sw $r0, $r1 # store r0 val of 31 into mem loc 64
+	# store array element # in r3 into mem loc 28 or 0x001C
+	add $r1, $r1 # r1 = 1 + 1 = 2
+	add $r1, $r1 # r1 = 2 + 2 = 4
+	init $r0, 1 # set r0 = 1
+	add $r0, $r0 # r0 = 1 + 1 = 2
+	add $r0, $r0 # r0 = 2 + 2 = 4
+	add $r0, $r0 # r0 = 4 + 4 = 8
+	add $r0, $r0 # r0 = 8 + 8 = 16
+	add $r0, $r0 # r0 = 16 + 16 = 32
+	sub $r0, $r1 # r0 = 32 - 4 = 28
+	sw $r3, r0 # store r3 = array element # in mem loc 28
+	lw $r3, $r1 # load val 1 into r3 from mem location 0x0001
+	init $r0, 0 # set r0 = 0 for HD
+	init $r1, 1 # set r1 = 1
+	add $r1, $r1 # r1 = 1 + 1 = 2 
+	add $r1, $r1 # r1 = 2 + 2 = 4
+	add $r1, $r1 # r1 = 4 + 4 = 8
+	add $r1, $r1 # r1 = 8 + 8 = 16
+	add $r1, $r1 # r1 = 16 + 16 = 32
+	sw $r0, $r1 # store HD into mom loc 32
+	init $r1, 1 # set r1 = 1 for masking
+	
+	
+	
+m_loop: #masking loop, DO NOT use init instr with r1
+	init $r0, 1 # set r0 = 1
+	add $r0, $r0 # r0 = 1 + 1 = 2 
+	add $r0, $r0 # r0 = 2 + 2 = 4
+	add $r0, $r0 # r0 = 4 + 4 = 8
+	add $r0, $r0 # r0 = 8 + 8 = 16
+	add $r0, $r0 # r0 = 16 + 16 = 32
+	add $r0, $r0 # r0 = 32 + 32 = 64
+	lw $r0, $r0 # load r0 val of 31 init stored in mem loc 64 back into r0
+	beqR0 6 #NOTE that is NOT negative and jumps forward 2^6
+	init $r0, 0 # set r0 = 0 so r3 can access mem loc 0x0000/XOR result
+	lw $r3, $r0 # r3 = XOR result which is stored in mem loc 0x0000
+	and $r3, $r1 # AND the XOR result (r3) with masking value (r1)
+	add $r1, $r1 # shift by 1 for mask value
+	init $r0, 0 # set r0 = 0 to compare with AND result
+	seqR0 $r3, $r0 # check if $r0 = $r3, if so then r0 = 0
+	beqR0 4 #jumps back 2^4
+	init $r0, 1 # set r0 = 1
+	lw $r3, $r0 # load val 1 into r3 from mem location 0x0001
+	add $r0, $r0 # r0 = 1 + 1 = 2 
+	add $r0, $r0 # r0 = 2 + 2 = 4
+	add $r0, $r0 # r0 = 4 + 4 = 8
+	add $r0, $r0 # r0 = 8 + 8 = 16
+	add $r0, $r0 # r0 = 16 + 16 = 32
+	lw $r0, $r0 # load HD into r0 from mem loc 32
+	add $r0, $r3 # HD + 1 (r3)
+	sll $r3, 3 # r3 = 1 << 3 = 8
+	sll $r3, 2 # r3 = 8 << 2 = 32
+	sw $r0, $r3 # store incremented HD back to mem loc 32
+	j 6 #jumps back 2^6
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+continue: #continue a_loop
+	init $r0, 0 # set r0 = 0
+	sw $r0, $r0 # set mem loc 0x0000 back to '0' overwriting XOR result
+	# remember that HD is stored in mem loc 32
+	init $r0, 1 # set r0 = 1
+	addi $r3, 3 # r3 = 1 + 3 = 4
+	addi $r3, 1 # r3 = 4 + 1 = 5
+	add $r0, $r0 # r0 = 1 + 1 = 2 
+	add $r0, $r0 # r0 = 2 + 2 = 4
+	add $r0, $r0 # r0 = 4 + 4 = 8
+	add $r0, $r0 # r0 = 8 + 8 = 16
+	add $r0, $r0 # r0 = 16 + 16 = 32
+	init $r1, 0 # set r1 = 0
+	add $r1, $r0 # r1 = 0 + 32 = 32
+	lw $r0, $r0 # load HD into r0 from mem loc 32
+	sub $r1, $r0 # r1 = 32 - HD
+	sw $r1, $r0 # store x (which is 32 - HD) into mem loc 32, overwriting HD
+	init $r0, 0 # set r0 = 0
+	lw $r3, $r0 # load val '0' into r3
+	addi $r3, 3 # r3 = 0 + 3 = 3
+	init $r0, 1 # set r0 = 1 to avoid next cases initially
+	lw $r3, $r3 # load best_matching_score val stored in mem loc 3 into r3
+	sltR0 $r1, $r3 # if x < best_matching_score then R0 == 0
+	beqR0 7 #jumps back 2^7
+	seqR0 $r1, $r3 # if x = best_matching_score then R0 == 0
+	#if R0 is 0 at this point, increment the best_matching_count
+	lw $r3, $r0 # load val '0' into r3
+	addi $r3, 3 # r3 = 0 + 3 = 3
+	addi $r3, 1 # r3 = 1 + 3 = 4
+	lw $r3, $r3 # load best_matching_count into r3 from mem loc 4
+	addi $r3, 1 # r3 = best_matching_count + 1
+	init $r0, 1 # set r0 = 1
+	add $r0, $r0 # r0 = 1 + 1 = 2
+	add $r0, $r0 # r0 = 2 + 2 = 4
+	sw $r3, $r0 # store incremented best_matching_count back to mem loc 4
+	beqR0 7 #jumps back 2^7
+	#if the first two cases fail, then it does not branch
+	init $r0, 1 # set r0 = 1
+	lw $r3, $r0 # load val '0' into r3
+	addi $r3, 2 # r3 = 1 + 2 = 3
+	lw $r0, $r3 # reset best_matching_count to 1 at mem loc 3
+	# x is in mem loc 32
+	init $r0, 0 # set r0 = 0
+	lw $r3, $r0 # load val '0' into r3
+	addi $r3, 3 # r3 = 0 + 3 = 3
+	add $r0, $r3 # r3 = 0 + 3 = 3
+	subi $r3, 2 # r3 = 3 - 2 = 1
+	sll $r3, 3 # r3 = 1 << 3 = 8
+	sll $r3, 2 # re = 8 << 2 = 32
+	lw $r3, $r3 # x stored in r3 from mem loc 32
+	lw $r3, $r0 # x replaces old best_matching_count with new one at mem loc 3
+	j a_loop
+out:
+	Halt
+	
